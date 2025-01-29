@@ -3,9 +3,19 @@ require('dotenv').config();
 
 let sequelize;
 
-if (process.env.JAWSDB_URL) {
-  sequelize = new Sequelize(process.env.JAWSDB_URL);
+if (process.env.DB_URL) {
+  // Use the provided database URL for production
+  sequelize = new Sequelize(process.env.DB_URL, {
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    }
+  });
 } else {
+  // Use local database for development
   sequelize = new Sequelize(
     process.env.DB_NAME,
     process.env.DB_USER,

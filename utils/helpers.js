@@ -25,4 +25,7 @@ module.exports = {
       return `<span for="img" aria-label="gear">⚙️</span>`;
     }
   },
+  eq: (a, b) => {
+    return a === b;
+  }
 };
